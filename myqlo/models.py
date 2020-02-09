@@ -10,3 +10,10 @@ class Image(models.Model):
     image_file = models.ImageField(upload_to = 'images/', default='images/qlo.jpg')
     caption = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.image_name
+
+    def save_image(self):
+        self.save()
