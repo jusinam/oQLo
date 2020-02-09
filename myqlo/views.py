@@ -33,3 +33,32 @@ def home(request):
         form = NewCommentForm(auto_id=False)
 
     return render(request, 'index.html', {"date": date, "images":images, "comments":comments, "form": form,})
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['first_name']
+            email = form.cleaned_data['email']
+            form.save()
+            send_welcome_email(name, email)
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account for {username} has been created successfully')
+            return redirect('/')
+        
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/registration_form.html', {'form':form})
+
+@login_required(login_url='/accounts/login/')
+def search_images(request):
+    if 'keyword' in request.GET and request.GET["keyword"]:
+        search_term = request.GET.get("keyword")
+        searched_images = Image.search_images(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message":message,"images": searched_images})
+
+    else:
+        message = "Your search query was empty. Type something to search."
+        return render(request, 'search.html', {"message": message})
