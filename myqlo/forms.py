@@ -1,6 +1,6 @@
 from crispy_forms.helper import FormHelper
 from django import forms
-from .models import Image
+from .models import Profile, Image, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from registration.forms import RegistrationForm
@@ -34,3 +34,26 @@ class NewImageForm(forms.ModelForm):
           'caption': forms.Textarea(attrs={'rows':4, 'cols':10,}),
         }
         
+
+class NewCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['author', 'image', 'pub_date']
+        widgets = {
+          'comment': forms.Textarea(attrs={'rows':1, 'cols':10}),
+        }
+        
+        def __init__(self, *args, **kwargs):
+            super(NewCommentForm, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.form_show_labels = False
+            self.fields['comment'].label = False
+            self.helper.show_label_comment = False
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+        widgets = {
+          'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
+        }
