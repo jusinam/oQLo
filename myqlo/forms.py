@@ -25,4 +25,12 @@ class RegisterForm(RegistrationForm):
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
         self.helper.form_show_labels = True 
+
+class NewImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['Author', 'image_name', 'pub_date', 'author_profile', 'likes']
+        widgets = {
+          'caption': forms.Textarea(attrs={'rows':4, 'cols':10,}),
+        }
         
