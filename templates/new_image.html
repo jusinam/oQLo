@@ -1,4 +1,4 @@
-{%extends "registration/base.html"%} 
+{%extends "registration/base.html"%}
 {% load bootstrap3 %}
 
 
@@ -9,7 +9,7 @@
     <div class="col-lg-3"></div>
 
     <div class="col-lg-6 pt-2 mt-4">
-       
+
       <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -17,22 +17,22 @@
         </div>
         <div class="panel-body">
 
-            
-                <form  action="{%url 'new-image'%}" method="post" enctype="multipart/form-data">
-                  {%csrf_token%}
-    
-                  {% bootstrap_form form%}
-                  <input type="submit" class="btn btn-success btn-lg" value="Post">
-                </form>
-          
-    
+
+          <form action="{%url 'new-image'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-outline-secondary btn-lg font-weight-bold" value="Post">
+          </form>
+
+
 
         </div>
 
       </div>
 
     </div>
-    
+
     <!-- empty div -->
     <div class="col-lg-3"></div>
   </div>
