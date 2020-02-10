@@ -13,9 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views
+from registration.backends.simple.views import RegistrationView
+from myqlo.forms import RegisterForm
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'', include('myqlo.urls')),
+    url(r'^accounts/register/$', RegistrationView.as_view(form_class=RegisterForm), name='register_to'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^logout/$', views.logout, {"next_page": '/'}), 
+    url(r'^tinymce/', include('tinymce.urls')),
 ]
