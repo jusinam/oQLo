@@ -1,0 +1,86 @@
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container mb-4 pb-4" style="height: 100%;">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 mt-4 pt-2 ">
+      <div class="pb-2">
+        {% if user.profile.photo %}
+        <img src="{{ user.profile.photo.url }}" alt=""
+          class="d-flex justify-content-start rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
+        {% else %}
+        <img src="https://i.pinimg.com/236x/b5/17/b0/b517b0140cbb0fb2dbf2510aeb8f88e9.jpg" alt=""
+          class="d-flex justify-content-start rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
+        {% endif %}
+        <h4> <span class="font-weight-bold"> Username:</span> {{user.username}} </h4>
+        <p> <span class="font-weight-bold"> Email:</span> {{user.email}} </p>
+        <p> <span class="font-weight-bold"> Bio:</span> {{ user.profile.bio}} </p>
+        <button class="btn btn-md btn-outline-secondary font-weight-bold" data-toggle="modal" data-target="#profile">
+          Edit Profile</button>
+      </div>
+      <hr>
+      <h4 class="font-weight-bold">My Uploads</h4>
+      <hr>
+      {% if images %}
+      {% for image_item in images%}
+      <a href="/image/{{image_item.id}}"><img src="{{ image_item.image_file.url }}" alt=""
+          class="rounded img-fluid mr-1" style="width: 200px;"></a>
+      {% endfor %}
+
+      {% else %}
+      <p>You have no uploads</p>
+      <div class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    <!-- empty div -->
+    <div class="col-lg-2"></div>
+
+  </div>
+</div>
+
+<!-- Modal starts here -->
+<div class="modal fade " id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content heavy-rain-gradient ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal3Label"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div>
+          <!-- profile update form  -->
+          <h4 class="font-weight-bold text-center">Update Profile</h4>
+          <hr class="">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+
+            <div class="form-group">
+              <button type="submit"
+                class="btn btn-outline-secondary waves-effect btn-lg mt-2 font-weight-bold btn-block"> Update </button>
+            </div>
+
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
