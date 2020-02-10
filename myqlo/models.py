@@ -28,26 +28,19 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
-
-
-         
+            
 class Image(models.Model):
-    image_name = models.CharField(max_length=255)
     image_file = models.ImageField(upload_to = 'images/', default='images/qlo.jpg')
+    image_name = models.CharField(max_length=255)
     caption = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
-    Author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
-
-
-
-    def __str__(self):
-        return self.image_name
-
+        
     def save_image(self):
         self.save()
-
+    
     def delete_image(self):
         self.delete()
         
@@ -57,17 +50,17 @@ class Image(models.Model):
         return images
     
     @classmethod
+    def search_images(cls, search_term):
+        images = cls.objects.filter(caption__icontains=search_term)
+        return images
+        
+    @classmethod
     def get_by_author(cls, Author):
         images = cls.objects.filter(Author=Author)
         return images
     
     def total_likes(self):
         self.likes.count()
-
-    @classmethod
-    def search_images(cls, search_term):
-        images = cls.objects.filter(description__icontains=search_term)
-        return images
     
     @classmethod
     def get_image(request, id):
@@ -84,10 +77,9 @@ class Image(models.Model):
         return self.image_name
     
     class Meta:
-        ordering = ['pub_date']
+        ordering = ['-pub_date']
         verbose_name = 'Image'
         verbose_name_plural = 'Images'
-
 
 class Comment(models.Model):
     comment = models.TextField(blank=True)
@@ -112,3 +104,5 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+        
+        
