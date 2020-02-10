@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +12,9 @@
   {% if title %}
   <title>QLo - {{title}}</title>
   {% else %}
-    <title> QLo </title>
+  <title> QLo </title>
   {% endif %}
- 
+
 
   {% block styles %}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -22,14 +23,14 @@
   <link rel="stylesheet" href="css/mdb.min.css">
   <!-- Plugin file -->
   <link rel="stylesheet" href="./css/addons/datatables.min.css">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <!-- Bootstrap core CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {% endblock %}
@@ -37,40 +38,42 @@
 </head>
 
 <body class="grey lighten-5 heavy-rain-gradient ">
-    {% include "navbar.html" %}
-
-    
-          
-
-          {% block content %}{% endblock %}
-
-        
-
-  
+  {% include "navbar.html" %}
 
 
 
-    {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <!-- JQuery -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <!-- Bootstrap tooltips -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-      <!-- Bootstrap core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<!-- Plugin file -->
-<script src="./js/addons/datatables.min.js"></script>
-      <!-- MDB core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
-      <script type="text/javascript" src="{% static 'scripts.js' %}"></script>
+
+  {% block content %}{% endblock %}
 
 
-    {% endblock %}
+
+
+
+
+
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Plugin file -->
+  <script src="./js/addons/datatables.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+  <script type="text/javascript" src="{% static 'scripts.js' %}"></script>
+
+
+  {% endblock %}
 
 </body>
 
