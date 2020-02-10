@@ -6,164 +6,174 @@
 {{block.super}}
 
 <div class="container">
-    
+
   <div class="row">
     <!-- Empty div -->
     <div class="col-lg-2"></div>
 
     <div class="col-lg-6">
-        
-        {% for image_item in images %}
-                <!-- Card -->
-          <div class="card mt-2 pb-2 mb-4 white">
-            <!-- Card header -->
-            <div class="card-footer pb-1 pt-1 text-dark font-weight-bold white">
-                <img src="{{ image_item.Author.profile.photo.url }}" alt="" class="rounded-circle img-fluid mr-1" style="width: 50px;">
-                {{image_item.Author}} 
-                 
-              </div>
 
-            <!-- Card image -->
-            <div class="view overlay">
-              {% if image_item.image_file %}
-              <img class="card-img-top pl-1 pr-1" src="{{image_item.image_file.url}}" alt="{{ image_item.image_name }}">
-              {% else %}
-              <img  class="card-img-top" src="https://i.pinimg.com/236x/b5/17/b0/b517b0140cbb0fb2dbf2510aeb8f88e9.jpg" alt="{{ image_item.image_name }}">
-              {% endif %}
-              <a href="/image/{{image_item.id}}">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
+      {% for image_item in images %}
+      <!-- Card -->
+      <div class="card mt-2 pb-2 mb-4 white">
+        <!-- Card header -->
+        <div class="card-footer pb-1 pt-1 text-dark font-weight-bold white">
+          <img src="{{ image_item.Author.profile.photo.url }}" alt="" class="rounded-circle img-fluid mr-1"
+            style="width: 50px;">
+          {{image_item.Author}}
 
-            <!-- Card content -->
-            <div class="card-body">
-                <a class='info' href="#{% url 'like_image' image_item.id %}">
-                    {%if image_item.likes.id == user.id%}
-                    <i class="fas fa-heart" style="font-size:20px;" class="success"></i>
-                    {%else%}
-                    <i class="far fa-heart" style="font-size:20px;" class="success"></i>
-                    {%endif%}
-                  </a>
-                  
-              <!-- End of like button -->
-              <!-- Title -->
-              <p class="card-title font-weight-bold" id="{{image_item.id}}">{{ image_item.Author }} <span class="card-text ml-2"> {{ image_item.description }} </span></p> 
-              <!-- Text -->
-              <!-- <p class="card-text">{{ image_item.description }}</p> -->
-              <!-- Button -->
-              {% for comment_item in comments %}
-              
-                {% if image_item.pk == comment_item.image.pk%}
-              <p> {{comment_item.author}} <span class="text-black-50"> {{comment_item.comment}} </span> </p>
-              {% endif %}
+        </div>
 
-              {% endfor %}
+        <!-- Card image -->
+        <div class="view overlay">
+          {% if image_item.image_file %}
+          <img class="card-img-top pl-1 pr-1" src="{{image_item.image_file.url}}" alt="{{ image_item.image_name }}">
+          {% else %}
+          <img class="card-img-top" src="https://i.pinimg.com/236x/b5/17/b0/b517b0140cbb0fb2dbf2510aeb8f88e9.jpg"
+            alt="{{ image_item.image_name }}">
+          {% endif %}
+          <a href="/image/{{image_item.id}}">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
 
-              <div><small class="text-black-50">{{image_item.pub_date|timesince}} ago</small></div>
-            </div>
+        <!-- Card content -->
+        <div class="card-body">
+          <a class='info' href="#{% url 'like_image' image_item.id %}">
+            {%if image_item.likes.id == user.id%}
+            <i class="fas fa-heart" style="font-size:20px;" class="success"></i>
+            {%else%}
+            <i class="far fa-heart" style="font-size:20px;" class="success"></i>
+            {%endif%}
+          </a>
 
-            <!-- Card footer -->
-              <div class="card-footer text-muted text-center white">
-                  <form  action="{%url 'home' %}" method="post" enctype="multipart/form-data">
+          <!-- End of like button -->
+          <!-- Title -->
+          <p class="card-title font-weight-bold" id="{{image_item.id}}">{{ image_item.Author }} <span
+              class="card-text ml-2"> {{ image_item.description }} </span></p>
+          <!-- Text -->
+          <!-- <p class="card-text">{{ image_item.description }}</p> -->
+          <!-- Button -->
+          {% for comment_item in comments %}
 
-                  {%csrf_token%}
-                  <div class="form-row">
-                    <div class="col-lg-10">
+          {% if image_item.pk == comment_item.image.pk%}
+          <p> {{comment_item.author}} <span class="text-black-50"> {{comment_item.comment}} </span> </p>
+          {% endif %}
 
-                        {{ form.comment|as_crispy_field }}
-
-                        <input type="hidden" value="{{image_item.pk}}" name="image_id">
-                      </div>
-                    <div class="col-lg-2 pr-2">
-                        <button type="submit" class="btn btn-default btn-sm font-weight-bold" value="Post">Post</button>
-                    </div>
-                  </div>
-
-                    </form>
-                </div>
-
-          </div>
-          <!-- Card -->
           {% endfor %}
 
-          </div>
+          <div><small class="text-black-50">{{image_item.pub_date|timesince}} ago</small></div>
+        </div>
+
+        <!-- Card footer -->
+        <div class="card-footer text-muted text-center white">
+          <form action="{%url 'home' %}" method="post" enctype="multipart/form-data">
+
+            {%csrf_token%}
+            <div class="form-row">
+              <div class="col-lg-10">
+
+                {{ form.comment|as_crispy_field }}
+
+                <input type="hidden" value="{{image_item.pk}}" name="image_id">
+              </div>
+              <div class="col-lg-2 pr-2">
+                <button type="submit" class="btn btn-unique btn-sm font-weight-bold" value="Post">Post</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+      <!-- Card -->
+      {% endfor %}
+
+    </div>
 
     <!-- empty div -->
     <div class="col-lg-3 mt-2 pt-2 mr-2 pr-2 sticky">
-        <table>
-            <tr>
-              <td> <a href="{%url 'profile'%}"> <img src="{{ user.profile.photo.url }}" alt="{{user.username}} photo" class="rounded-circle img-fluid mr-1" style="width: 60px;"></a>
-             </td>
-             <td class="ml-2 pl-2"><span class="font-weight-bold pl-0 ml-0"> <a href="{%url 'profile'%}">{{user.username}} </a> </span> <br>
-              {{user.first_name}} {{user.last_name}}</td>
-            </tr>
-          </table>
-        
+      <table>
+        <tr>
+          <td> <a href="{%url 'profile'%}"> <img src="{{ user.profile.photo.url }}" alt="{{user.username}} photo"
+                class="rounded-circle img-fluid mr-1" style="width: 60px;"></a>
+          </td>
+          <td class="ml-2 pl-2"><span class="font-weight-bold pl-0 ml-0"> <a href="{%url 'profile'%}">{{user.username}}
+              </a> </span> <br>
+            {{user.first_name}} {{user.last_name}}</td>
+        </tr>
+      </table>
+
     </div>
 
     <div class="col-lg-1"></div>
 
   </div>
- </div>
+</div>
 
- {% else %}
+{% else %}
 
-          <div style="background:url('http://getwallpapers.com/wallpaper/full/5/1/c/23650.jpg');background-size: cover;background-repeat: no-repeat;height: 100vh;background-attachment: fixed;"> 
-           
-              
-                <div class=" " style="height: 100vh;">
-                    
-                    <div class="container-fluid d-flex align-items-center justify-content-center h-50">
 
-                        <div class="row d-flex justify-content-center text-center">
+<div style="background:url('./media/backgg.jpg');background-size: cover;background-repeat: no-repeat;">
 
-                            <div class="col-lg-12 pt-5 mt-5" style="margin-bottom: 5%;">
 
-                                <!-- Heading -->
-                                <h3 class="display-4 font-weight-bold white-text pt-5">Welcome to QLo</h3>
+  <div class=" " style="height: 93.5vh;">
 
-                                <!-- Divider -->
-                                <hr class="hr-light" style="margin-bottom: 5%;">
-                                <a href="/accounts/login"><button class="btn btn-lg btn-unique" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    SIGN IN </button>
-                                </a>
-                                <a href="accounts/register"><button class="btn btn-lg btn-unique" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    SIGN UP</button>
-                                </a>
-                                
-                                
-                            </div> 
-                            <div class="spinner-grow text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-secondary" role="status" style="margin-left: 5%;">
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-success" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-danger" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-warning" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-info" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-light" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
-                              <div class="spinner-grow text-dark" role="status" style="margin-left: 5%;" >
-                                <span class="sr-only">Loading...</span>
-                              </div>
+    <img src="../media/oQLo.svg" style="height: 15%;">
+    <div class="container-fluid d-flex align-items-center justify-content-center h-50">
 
-                        </div>
 
-                    </div>
-                </div>
-                </div>
+      <div class="row d-flex justify-content-center text-center">
+
+        <div class="col-lg-12 pt-5 mt-5" style="margin-bottom: 5%;">
+
+          <!-- Heading -->
+          <h3 class="display-4 font-weight-bold pt-5" style="color: rgb(167, 126, 126);">Welcome to QLo</h3>
+
+          <!-- Divider -->
+          <hr class="hr-light" style="margin-bottom: 5%;">
+          <a href="/accounts/login"><button type="button" id="btn-one" class="btn btn-lg btn-unique">
+
+              SIGN IN </button>
+          </a>
+          <a href="accounts/register"><button type="button" id="btn-one" class="btn btn-lg btn-unique">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only">Loading...</span>
+
+              SIGN UP</button>
+          </a>
+
+
+        </div>
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-danger" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-light" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark" role="status" style="margin-left: 5%;">
+          <span class="sr-only">Loading...</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endif %}
 {% endblock %}
