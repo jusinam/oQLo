@@ -106,3 +106,35 @@ def new_image(request):
         form = NewImageForm()
     return render(request, 'new_image.html', {"form": form})
 
+@login_required(login_url='/accounts/login/')
+def user_profiles(request):
+    current_user = request.user
+    Author = current_user
+    images = Image.get_by_author(Author)
+    
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+        return redirect('profile')
+        
+    else:
+        form = ProfileUpdateForm()
+    
+    return render(request, 'registration/profile.html', {"form":form, "images":images})
+
+
+@login_required(login_url='/accounts/login/')
+def like_image(request, id):
+    image = get_object_or_404(Image, id=request.POST.get('image_id'))
+    
+    is_liked = False
+    if image.likes.filter(id = request.user.id).exists():
+        image.likes.remove(request.user)
+        is_liked = False
+    else:
+        image.likes.add(request.user)
+        is_liked = True
+    
+    return ("home")
