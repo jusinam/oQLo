@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="">
+
+  <div class="">
+    {% if images %}
+    <div class="jumbotron jumbotron-fluid bg-dark">
+      <div class="">
+        <h2 class="display-6 text-center font-weight-bold text-white">Found {{ images|length }} images for searched term
+          {{message}}</h2>
+      </div>
+    </div>
+    {% else %}
+    <div class="jumbotron jumbotron-fluid bg-dark">
+      <div class="">
+        <h2 class="display-5 text-center font-weight-bold text-white">Found 0 images for the searched term {{message}}
+        </h2>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <!-- Empty div -->
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-6">
+
+
+        {% for image_item in images %}
+        <!-- Card -->
+        <div class="card mt-2 pb-2 mb-2">
+          <!-- Card header -->
+          <div class="card-footer text-dark font-weight-bold">
+            {{image_item.Author}}
+          </div>
+
+          <!-- Card image -->
+          <div class="view overlay">
+            <img class="card-img-top" src="{{image_item.image_file.url}}" alt="{{ image_item.image_name }}">
+            <a href="/image/{{image_item.id}}">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title -->
+            <p class="card-title font-weight-bold">{{ image_item.Author }} <span class="card-text ml-2">
+                {{ image_item.caption }} </span></p>
+
+            {% for comment_item in comments %}
+
+            {% if image_item.pk == comment_item.image.pk%}
+            <p> {{comment_item.author}} <span class=""> {{comment_item.comment}} </span> </p>
+            {% endif %}
+
+            {% endfor %}
+
+            <div><small class="text-black-50">{{image_item.pub_date|timesince}} ago</small></div>
+          </div>
+
+          <!-- Card footer -->
+
+
+        </div>
+        <!-- Card -->
+        {% endfor %}
+
+      </div>
+
+      <!-- empty div -->
+      <div class="col-lg-3"></div>
+      <div class="col-lg-1"></div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+{% endblock %}
