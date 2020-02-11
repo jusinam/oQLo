@@ -80,7 +80,7 @@ Launch the application locally by running the command
 No known bugs
 
 ## Site Live Link
-[https://evan-smat-ups.herokuapp.com/](https://evan-qlo-ups.herokuapp.com/)
+[https://evan-qlo-ups.herokuapp.com/](https://evan-qlo-ups.herokuapp.com/)
 
 #### Collaborate
 >Incase of any questions, problems or ideas concerning the app, feel free to reach out to me:
