@@ -2,7 +2,7 @@
 A Django generated app using the idea of Instagram with functionalities: User; signup - signin , image posting, liking, commenting and updating profile.
 
 ## Author
-* Evans Nyambane
+* Evans Onchagwa
 
 
 ### QLo
@@ -84,7 +84,7 @@ No known bugs
 
 #### Collaborate
 >Incase of any questions, problems or ideas concerning the app, feel free to reach out to me:
->>Github: [Evans Nyambane](https://github.com/DjCooGie)
+>>Github: [Evans Onchagwa](https://github.com/DjCooGie)
 >>Email: evansonchagwa01@gmail.com
 
 #### License
