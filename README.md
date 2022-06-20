@@ -2,7 +2,7 @@
 A Django generated app using the idea of Instagram with functionalities: User; signup - signin , image posting, liking, commenting and updating profile.
 
 ## Author
-* Evans Onchagwa
+* Evans ON
 
 
 ### QLo
@@ -80,13 +80,12 @@ Launch the application locally by running the command
 No known bugs
 
 ## Site Live Link
-[https://evan-qlo-ups.herokuapp.com/](https://evan-qlo-ups.herokuapp.com/)
+[Click here](https://evan-qlo-ups.herokuapp.com/)
 
 #### Collaborate
 >Incase of any questions, problems or ideas concerning the app, feel free to reach out to me:
->>Github: [Evans Onchagwa](https://github.com/DjCooGie)
->>Email: evansonchagwa01@gmail.com
+>>Email: [Send mail](mailto:evansonchagwa01@gmail.com)
 
 #### License
 MIT
-&copy;2020 Evans Onchagwa
+&copy;2020 Evans ON
