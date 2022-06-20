@@ -43,7 +43,7 @@ A Django generated app using the idea of Instagram with functionalities: User; s
   [Here's](https://www.python.org/) a brief intro about what a developer must do in order to start running the app locally:
 
   ```
-  $ git clone https://github.com/DjCooGie/oQLo.git
+  $ git clone https://github.com/jusinam/oQLo.git
   $ cd oQLo/
   ```
   * create a virtual environment
